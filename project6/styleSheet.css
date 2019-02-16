@@ -1,9 +1,24 @@
+
 header {
     color: black;
     text-align: center;
 }
 
+#background {
+    
+    width: 50%;
+    height: 10%;
+    
+}
+
 #logo {
+    position: absolute;
     width: 204px;
     height: 83px;
+    
 }
+
+
+
+
+
