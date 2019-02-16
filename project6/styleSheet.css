@@ -2,3 +2,8 @@ header {
     color: black;
     text-align: center;
 }
+
+#logo {
+    width: 204px;
+    height: 83px;
+}
