@@ -1,8 +1,80 @@
 'use strict'
 
+
+
+var salmonTable = document.getElementById("Monster")
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+salmonTable.storeHours = [];
+
 
 //pike sales
+function Salmon(location, minCrust, maxCrust, avgCookies) {
+  this.location = location;
+  this.minCrust = minCrust;
+  this.maxCrust = maxCrust;
+  this.avgCookies = avgCookies;
+  this.totalCookiesPerDay = 0;
+  this.cookiesPerHour = [];
+  Salmon.storeInfo.push(this);
+
+}
+
+salmonTable.storeHours = [];
+
+Salmon.prototype.render = function() {
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.location;
+  trEl.append(tdEl);
+  salmonTable.appendChild(trEl);
+}
+
+salmonTable.storeHours = []; 
+
+Salmon.prototype.render = function() {
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.location;
+  trEl.append(tdEl);
+  salmonTable.appendChild(trEl);
+
+  for(var i = 0; i < hours.length; i++); {
+  var randomNumberCookies = Math.round( (Math.round( Math.random() * (this.max - this.min) + this.min)) * this.avgCookies);
+
+  tdEl = document.createElement('td');
+  tdEl.textContent = randomNumberCookies;
+  trEl.appendChild(tdEl);
+  this.cookiesPerHour.push(randomNumberCookies);
+  }
+}
+
+
+Salmon.RenderHeader = function() {
+  var headerRow = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent('');
+  headerRow.appendChild(thEl);
+  for(var i = 0; i < hours.length; i++) {
+  var thEl = document.createElement('th');
+  thEl.textContent = hours[i];
+  headerRow.appendChild(thEl);
+  } 
+  salmonTable.prepend(headerRow);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 var pike = {
   location: '1st and pike',
   minCrust: 23,
@@ -44,6 +116,7 @@ pike.calcAvgCookiesSold();
 pike.createPikeTotalDailySales();
 pike.render();
 console.log(pike.avgCookieSoldPerHour);
+
 
 //Seatac sales
 var seaTac = {
@@ -212,3 +285,4 @@ alki.calcAvgCookiesSold();
 alki.createAlkiTotalDailySales();
 alki.render();
 console.log(alki.avgCookieSoldPerHour);
+*/
