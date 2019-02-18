@@ -3,43 +3,34 @@
 
 
 var salmonTable = document.getElementById("Monster")
+var make = document.getElementById('make-salmon-cookies');
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 salmonTable.storeHours = [];
 
 
 //pike sales
-function Salmon(location, minCrust, maxCrust, avgCookies) {
+function Salmon(location, min, max, avgCookies,) {
   this.location = location;
-  this.minCrust = minCrust;
-  this.maxCrust = maxCrust;
+  this.min = min;
+  this.max = max;
   this.avgCookies = avgCookies;
   this.totalCookiesPerDay = 0;
   this.cookiesPerHour = [];
-  Salmon.storeInfo.push(this);
+  this.dailyTotals = 0;
+  salmonTable.storeHours.push(this);
 
 }
-
-salmonTable.storeHours = [];
-
-Salmon.prototype.render = function() {
-  var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
-  tdEl.textContent = this.location;
-  trEl.append(tdEl);
-  salmonTable.appendChild(trEl);
-}
-
 salmonTable.storeHours = []; 
 
 Salmon.prototype.render = function() {
   var trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
   tdEl.textContent = this.location;
-  trEl.append(tdEl);
+  trEl.appendChild(tdEl);
   salmonTable.appendChild(trEl);
 
-  for(var i = 0; i < hours.length; i++); {
-  var randomNumberCookies = Math.round( (Math.round( Math.random() * (this.max - this.min) + this.min)) * this.avgCookies);
+  for(var i = 0; i < hours.length; i++) {
+  var randomNumberCookies = Math.round( (Math.round( Math.random() * (this.max - this.min) + this.min )) * this.avgCookies);
 
   tdEl = document.createElement('td');
   tdEl.textContent = randomNumberCookies;
@@ -49,10 +40,10 @@ Salmon.prototype.render = function() {
 }
 
 
-Salmon.RenderHeader = function() {
+Salmon.renderHeader = function() {
   var headerRow = document.createElement('tr');
   var thEl = document.createElement('th');
-  thEl.textContent('');
+  thEl.textContent = '';
   headerRow.appendChild(thEl);
   for(var i = 0; i < hours.length; i++) {
   var thEl = document.createElement('th');
@@ -63,9 +54,54 @@ Salmon.RenderHeader = function() {
 };
 
 
+Salmon.renderFooter = function() {
+  var footerFow = document.createElement('tr');
+  var dailyTotals = [];
+  for( var i = -1; i < hours.length; i++) {
+    var thEl = document.createElement('th');
+    thEl.textContent = footerFow[i];
+    footerFow.appendChild(thEl);
+  }
+  salmonTable.append(footerFow);
+};
 
 
+Salmon.newStores = function() {
+  event.preventDefault();
 
+  var newLoction = event.target.storeLocation.value;
+  var newMin = event.target.storeMin.value;
+  var newMax = event.target.store.storeMax.value;
+  var newAvg = event.target.storeAvg.value;
+
+  var newStores = new Salmon(newLoction, newMin, newMax, newAvg);
+  newStores.render();
+
+  salmonTable.textContent = '';
+  salmonTable.renderHeader();
+  salmonTable.renderStoreHours();
+};
+
+var pike = new Salmon('1st and Pike', '23', '65', '6.3');
+var seatac = new Salmon('SeaTac', '3', '24', '1.2');
+var seattleCenter = new Salmon('Seattle Center', '11', '24', '3.7');
+var capHill = new Salmon('Capitol Hill', '20', '38', '2.3');
+var alki = new Salmon('Alki', '2', '16', '4.6');
+
+Salmon.renderStoreHours = function() {
+  for(var i = 0; i < hours.length; i++) {
+    Salmon.storeHours[i].render();
+  }
+};
+
+Salmon.renderHeader();
+pike.render();
+seatac.render();
+seattleCenter.render();
+capHill.render();
+alki.render();
+Salmon.renderFooter();
+make.addEventListener('submit', Salmon.newStores);
 
 
 
