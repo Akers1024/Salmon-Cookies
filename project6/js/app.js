@@ -1,11 +1,181 @@
 'use strict'
 
 
+var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'];
 
+
+var salmonCookieTable = document.getElementById("Monster");
+
+var cookiesSoldEachHour = [];
+var cookieShops = [];
+
+
+function Salmon(location, minCrust, maxCrust, avgCookies) {
+  this.location = location;
+  this.minCrust = minCrust;
+  this.maxCrust = maxCrust;
+  this.avgCookies = avgCookies;
+  this.customersEachHour = [];
+  this.calcCustomersEachHour = function() {
+    for(var i = 0; i < hours.length; i++) {
+      this.customersEachHour.push((Math.random() * (this.maxCrust - this.minCrust + 1)) + this.minCrust);
+    }
+  };
+  this.cookiesSoldEachHour = [];
+  this.calcCookiesSoldEachHour = function() {
+    this.calcCustomersEachHour();
+    for(var i = 0; i < hours.length; i++) {
+      this.cookiesSoldEachHour.push(Math.ceil(this.customersEachHour[i] * this.avgCookies));
+      this.totalCookiesPerDay += this.cookiesSoldEachHour[i];
+
+      console.log(this.totalCookiesPerDay, ': cookie tots');
+    }
+  };
+
+  this.totalCookiesPerDay = 0;
+  cookieShops.push(this);
+
+  this.render = function() {
+    var trEl = document.createElement('tr');
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.location;
+    trEl.appendChild(tdEl);
+    for(var i = 0; i < hours.length; i++) {
+      tdEl = document.createElement('td');
+      tdEl.textContent = this.cookiesSoldEachHour[i];
+      trEl.appendChild(tdEl);
+    }
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.totalCookiesPerDay;
+    trEl.appendChild(tdEl);
+    salmonCookieTable.appendChild(trEl);
+  };
+  this.calcCookiesSoldEachHour();
+  
+};
+
+
+new Salmon('1st and Pike', 23, 65, 6.3);
+new Salmon('SeaTac', 3, 24, 1.2);
+new Salmon('Seattle Center', 11, 24, 3.7);
+new Salmon('Capitol Hill', 20, 38, 2.3);
+new Salmon('Alki', 2, 16, 4.6);
+
+
+
+function makeHeaderRow() {
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = '';
+  trEl.appendChild(thEl);
+
+  for(var i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hours[i];
+    trEl.appendChild(thEl);
+  }
+  thEl = document.createElement('th');
+  thEl.textContent = 'Daily Location Totals';
+  trEl.appendChild(thEl);
+
+
+  salmonCookieTable.appendChild(trEl);
+
+}
+
+function salmonRows() {
+  for(var i = 0; i < cookieShops.length; i++) {
+    cookieShops[i].render();
+  }
+};
+
+makeHeaderRow();
+salmonRows();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 var salmonTable = document.getElementById("Monster")
 
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-salmonTable.storeHours = [];
+var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'];
+
 
 
 //pike sales
@@ -17,10 +187,10 @@ function Salmon(location, min, max, avgCookies,) {
   this.totalCookiesPerDay = 0;
   this.cookiesPerHour = [];
   this.dailyTotals = 0;
-  salmonTable.storeHours.push(this);
+
 
 }
-salmonTable.storeHours = []; 
+
 
 Salmon.prototype.render = function() {
   var trEl = document.createElement('tr');
@@ -56,7 +226,7 @@ Salmon.renderHeader = function() {
 //create Footer
 Salmon.renderFooter = function() {
   var footerFow = document.createElement('tr');
-  var dailyTotals = [];
+  
   for( var i = -1; i < hours.length; i++) {
     var thEl = document.createElement('th');
     thEl.textContent = footerFow[i];
@@ -81,6 +251,25 @@ seattleCenter.render();
 capHill.render();
 alki.render();
 Salmon.renderFooter();
+
+
+
+
+
+
+
+
+'use strict';
+// console.log('Script loaded sucessfully');
+var tableArray = ['one', 'two', 'three', 'four', 'five']; // Data to be appended to table row.
+var toBecomeATable = document.getElementById('i-am-test-table'); // accessing the table id in the HTML.
+var trEl = document.createElement('tr'); // Creates the table row element to be appended to the HTML page.
+for (var i = 0; i < tableArray.length; i++) { // For loop that pulls data from the array to make data for the row.
+  var tdEl = document.createElement('td'); // Creates the table data element for the row.
+  tdEl.textContent = tableArray[i]; // grabs the data from the array that is to be the data element.
+  trEl.appendChild(tdEl); // appends the data element that it created to the row.
+}
+toBecomeATable.appendChild(trEl); // appends the entire row that was just created by the for loop.
 
 
 
