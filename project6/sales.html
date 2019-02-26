@@ -6,20 +6,54 @@
         <title>Salmon Cookies</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="styleSheet.css">
+        <link rel="styleSheet" type="text/css" media="style" href="css/reset.css">
        
     </head>
     <body>
+        <header>
+            
+            <img id="rightFish" src="salmon.png" alt="salmon">
+           
+                
+            
+            <img id="leftFish" src="salmon.png" alt="salmon">
+        </header>
         
-        <img id="logo" src="salmon.png" alt="salmon">
-        <img id="logo2" src="salmon.png" alt="salmon">
-        <img id="background" src="fishmarket.jpg" alt="FishMarket">
+        
+        <div id="header">
         <h2>Salmon Cookie Table</h2>
+        </div>
+       
+        <div id="locator">
         <table id="Monster"></table>
+        </div>
 
+        <form id="Mash">
+            <fieldset>
+                <legend>New Store</legend>
+                <label for='location'>Location</label> 
+                <input name='location' type="text"/> 
+
+                <label for="minCrust">Minimum Customers</label>
+                <input  name="minCrust" type="number"/>
+
+                <label for="maxCrust" >Maximum Customers</label> 
+                <input  name="maxCrust" type="number"/>
+
+                <label for ="avgCookies" >Average Cookies</label>
+                <input name="avgCookies" type="number"/>
+
+                <button type="submit">Add New Store</button>
+            </fieldset>
+        </form>
+
+        
 
         
     
    
         <script src="js/app.js"></script>
     </body>
+
+    
 </html>
