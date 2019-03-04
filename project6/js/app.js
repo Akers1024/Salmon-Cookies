@@ -138,7 +138,7 @@ function makeFooterRow(){     /// nested FOR loop
   var trEl = document.createElement('tr');  //creating table row 
   var tdEl = document.createElement('td');   
   tdEl.textContent = 'Total For All Locations';
-  var trEl = document.createElement('tr');
+  //var trEl = document.createElement('tr');
   trEl.setAttribute('id', 'footer');
   trEl.appendChild(tdEl);
   for(var i = 0; i < hours.length; i++){  //loop over all cells 
